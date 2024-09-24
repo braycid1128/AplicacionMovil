@@ -14,7 +14,7 @@ export class PerfilEstudiantePage {
     career: 'Ingeniería en Informática',
     yearOfEntry: 2020,
     matricula: '2020101234',
-    email: 'juan.perez@university.com',
+    email: 'estudiante@duocuc.cl',
     semester: '6to Semestre'
   };
 

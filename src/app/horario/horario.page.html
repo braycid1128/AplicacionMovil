@@ -1,13 +1,121 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>horario</ion-title>
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pagina-estudiante" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="md" class="ion-text-center">Horario</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">horario</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="background-image">
+  <div class="schedule-container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h3>Lunes</h3>
+          <ion-card>
+            <ion-card-header>Arquitectura</ion-card-header>
+            <ion-card-content>08:00 AM - 09:30 AM</ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>Calidad de Software</ion-card-header>
+            <ion-card-content>10:00 AM - 11:30 AM</ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col>
+          <h3>Martes</h3>
+          <ion-card>
+            <ion-card-header>Estadistica Descriptiva</ion-card-header>
+            <ion-card-content>08:00 AM - 09:30 AM</ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>Etica para el Trabajo</ion-card-header>
+            <ion-card-content>10:00 AM - 11:30 AM</ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h3>Miércoles</h3>
+          <ion-card>
+            <ion-card-header>Arquitectura</ion-card-header>
+            <ion-card-content>08:00 AM - 09:30 AM</ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>Fundamentos de Machine Learning</ion-card-header>
+            <ion-card-content>10:00 AM - 11:30 AM</ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col>
+          <h3>Jueves</h3>
+          <ion-card>
+            <ion-card-header>Calidad de Software</ion-card-header>
+            <ion-card-content>08:00 AM - 09:30 AM</ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>Arquitectura</ion-card-header>
+            <ion-card-content>10:00 AM - 11:30 AM</ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <h3>Viernes</h3>
+          <ion-card>
+            <ion-card-header>Etica para el Trabajo</ion-card-header>
+            <ion-card-content>08:00 AM - 09:30 AM</ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>Estadistica Descriptiva</ion-card-header>
+            <ion-card-content>10:00 AM - 11:30 AM</ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
+
+<!-- Footer con un botón para ver el perfil -->
+<ion-footer>
+  <ion-toolbar color="secondary" mode="md">
+    <ion-buttons slot="start">
+      <ion-button (click)="irAperfil()">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="irAcalendario()">
+        <ion-icon name="calendar-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+<style>
+  /* Imagen de fondo */
+  .background-image {
+    --background: url('assets/img/background.jpg') no-repeat center center / cover;
+    height: 100%;
+  }
+
+  /* Contenedor para el horario */
+  .schedule-container {
+    padding: 20px;
+  }
+
+  /* Estilo para las cards de asignaturas */
+  ion-card {
+    margin-bottom: 15px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+</style>

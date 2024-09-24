@@ -22,4 +22,8 @@ export class PaginaEstudiantePage {
   goToPerfilEstudiante() {
     this.router.navigate(['/perfil-estudiante']);
   }
+
+  goToHorario() {
+    this.router.navigate(['/horario']);
+  }
 }

@@ -14,7 +14,7 @@ export class PerfilDocentePage {
     teach: 'Arquitectura',
     yearOfEntry: 2004,
     office: 'Sala 205, Edificio Principal',
-    email: 'carlos.mendoza@university.com',
+    email: 'docente@duocuc.cl',
     hours: 'Lunes a Viernes, 10:00 AM - 12:00 PM'
   };
 
