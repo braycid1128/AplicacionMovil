@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pagina-docente" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="md" class="ion-text-center">Codigo QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="background-image">
+  <ion-list>
+    <ion-item *ngFor="let section of sections" (click)="generateQRCode(section)">
+      <ion-label>{{ section }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="qrCodeData" class="qr-code-container">
+    <qrcode [qrdata]="qrCodeData" [width]="256"></qrcode>
+    <p>Escanea el código QR para: {{ qrCodeData }}</p>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="secondary" mode="md"></ion-toolbar>
+</ion-footer>

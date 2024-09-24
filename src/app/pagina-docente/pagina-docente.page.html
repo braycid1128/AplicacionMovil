@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title mode="md" class="ion-text-center">Docente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="background-image">
+  <div class="form-container">
+    <div class="button-container">
+      <!-- Botón para Generar Código -->
+      <ion-button color="tertiary" expand="block" class="button-item" mode="ios" (click)="goToCodigoQr()">
+        <ion-icon name="key-outline" slot="start"></ion-icon>
+        Generar Código
+      </ion-button>
+
+      <!-- Botón para Ver Secciones -->
+      <ion-button color="secondary" expand="block" class="button-item" mode="ios" (click)="goToSecciones()">
+        <ion-icon name="folder-outline" slot="start"></ion-icon>
+        Ver Secciones
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
+
+<!-- Footer en la parte inferior de la pantalla -->
+<ion-footer>
+  <ion-toolbar color="secondary" mode="md">
+    <ion-buttons slot="start" (click)="goToPerfilDocente()">
+      <ion-button>
+        <ion-icon name="person-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="calendar-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+<style>
+  /* Imagen de fondo */
+  .background-image {
+    --background: url('assets/img/background.jpg') no-repeat center center / cover;
+    height: 100%;
+  }
+
+  /* Contenedor del formulario centrado */
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    height: 100%; /* Ocupa todo el alto de la pantalla */
+    padding: 20px; /* Espacio alrededor del contenido */
+  }
+
+  /* Contenedor de los botones */
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre los botones */
+    padding: 20px;
+    width: 100%; /* Para que ocupe el ancho del contenedor */
+    max-width: 400px; /* Ancho máximo para los botones */
+  }
+
+  /* Estilo para el footer */
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+</style>

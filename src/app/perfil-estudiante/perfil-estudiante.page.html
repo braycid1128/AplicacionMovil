@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pagina-estudiante" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="md" class="ion-text-center">Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="background-image">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ student.name }}</ion-card-title>
+      <ion-card-subtitle>{{ student.career }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Sección de la foto del estudiante -->
+      <div class="profile-picture">
+        <img [src]="student.photo || 'assets/default-avatar.png'" alt="Foto de {{ student.name }}">
+      </div>
+
+      <!-- Información adicional del estudiante -->
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <strong>Año de Ingreso:</strong>
+            <p>{{ student.yearOfEntry }}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <strong>Matrícula:</strong>
+            <p>{{ student.matricula }}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <strong>Correo Electrónico:</strong>
+            <p>{{ student.email }}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <strong>Semestre:</strong>
+            <p>{{ student.semester }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!-- Footer en la parte inferior de la pantalla -->
+<ion-footer>
+  <ion-toolbar color="secondary" mode="md">
+    <ion-buttons slot="end" (click)="confirmLogout()">
+      <ion-icon name="power-outline" size="large"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
+<style>
+  /* Imagen de fondo */
+  .background-image {
+    --background: url('assets/img/background.jpg') no-repeat center center / cover;
+    height: 100%;
+  }
+
+  /* Estilo para el footer */
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+</style>

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pagina-estudiante" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="md" class="ion-text-center">Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="background-image">
+  
+  <ion-card class="course" *ngFor="let course of courses">
+    <ion-card-header>
+      <ion-card-title>{{ course.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="progress-bar-container">
+        <div class="progress-bar" [style.width]="course.percentage + '%'"></div>
+      </div>
+      <p>{{ course.percentage }}%</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<!-- Footer en la parte inferior de la pantalla -->
+<ion-footer>
+  <ion-toolbar color="secondary" mode="md">
+  </ion-toolbar>
+</ion-footer>
+
+<style>
+  /* Imagen de fondo */
+  .background-image {
+    --background: url('assets/img/background.jpg') no-repeat center center / cover;
+    height: 100%;
+  }
+
+
+  /* Estilo para el footer */
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+</style>

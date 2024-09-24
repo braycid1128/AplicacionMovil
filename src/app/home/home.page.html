@@ -1,20 +1,78 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title mode="md" class="ion-text-center">RegistrAPP</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content [fullscreen]="true" class="background-image">
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <!-- Botones alineados uno al lado del otro -->
+    <div class="button-container">
+      <!-- Botón de Estudiantes con ícono -->
+      <ion-button color="tertiary" class="button-item" mode="ios" (click)="goToEstudiantes()">
+        <ion-icon name="school-outline" slot="start"></ion-icon>
+        Estudiantes
+      </ion-button>
+
+      <!-- Botón de Docentes con ícono -->
+      <ion-button color="secondary" class="button-item" mode="ios" (click)="goToDocentes()">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        Docentes
+      </ion-button>
+    </div>
   </div>
 </ion-content>
+
+<!-- Footer en la parte inferior de la pantalla -->
+<ion-footer>
+  <ion-toolbar color="secondary" mode="md">
+  </ion-toolbar>
+</ion-footer>
+
+<style>
+  /* Imagen de fondo */
+  .background-image {
+    --background: url('assets/img/background.jpg') no-repeat center center / cover;
+    height: 100%;
+  }
+
+  /* Estilo del header */
+  ion-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10; /* Asegura que esté encima del contenido */
+  }
+
+  /* Estilo del contenedor */
+  #container {
+    color: white;
+    text-align: center;
+    padding-top: 80px; /* Añadir espacio para evitar que el contenido quede detrás del header */
+  }
+
+  /* Contenedor de los botones */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+    padding: 20px;
+  }
+
+  /* Estilo para los botones */
+  .button-item {
+    flex: 1; /* Esto asegura que ambos botones tengan el mismo tamaño */
+    max-width: 150px; /* Tamaño máximo para los botones */
+    text-align: center;
+  }
+
+  /* Estilo para el footer */
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+</style>
