@@ -1,33 +1,38 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/pagina-docente" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
     <ion-title mode="md" class="ion-text-center">Secciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="background-image">
-  <ion-list>
-    <ion-item *ngFor="let seccion of secciones" (click)="verDetalle(seccion)">
+  <ion-list *ngIf="!qrImage">
+    <ion-item *ngFor="let seccion of secciones" (click)="mostrarQr(seccion)">
       <ion-label>
         <h2>{{ seccion.codigo }}</h2>
         <p>Descripción: {{ seccion.descripcion }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <!-- Mostrar imagen de QR al seleccionar una sección -->
+  <div *ngIf="qrImage" class="qr-container">
+    <ion-label class="ion-text-center">
+      <h2>{{ qrSeccion.codigo }}</h2>
+      <p>Descripción: {{ qrSeccion.descripcion }}</p>
+    </ion-label>
+    <img [src]="qrImage" class="qr-image" alt="Código QR">
+    <ion-button expand="block" color="tertiary" (click)="cerrarQr()">
+      Cerrar
+    </ion-button>
+  </div>
 </ion-content>
 
-<!-- Footer con un botón para ver el perfil y otro para ver el calendario -->
+<!-- Footer con botones de perfil y calendario -->
 <ion-footer>
   <ion-toolbar color="secondary" mode="md">
-    <ion-buttons slot="start">
-      <ion-button (click)="irAperfil()">
-        <ion-icon name="person-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="irAcalendario()">
-        <ion-icon name="calendar-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-footer>
 
@@ -60,5 +65,31 @@
   ion-label p {
     font-size: 14px;
     color: #666;
+  }
+
+  /* Contenedor del QR */
+  .qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  /* Imagen del QR */
+  .qr-image {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 200px; /* Ajusta el tamaño de la imagen */
+    height: 200px;
+  }
+
+  /* Estilo para el footer */
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
   }
 </style>

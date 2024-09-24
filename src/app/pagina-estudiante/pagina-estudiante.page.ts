@@ -10,7 +10,6 @@ export class PaginaEstudiantePage {
 
   constructor(private router: Router) { }
 
-  // Método para navegar a la página de Docentes
   goToAsistencia() {
     this.router.navigate(['/asistencia']);
   }

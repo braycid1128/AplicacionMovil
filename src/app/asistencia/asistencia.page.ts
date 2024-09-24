@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AsistenciaPage implements OnInit {
 
   courses = [
-    { name: 'Arquitectura', percentage: 0 },  // Iniciamos con 0 para que se vea la animación
+    { name: 'Arquitectura', percentage: 0 },
     { name: 'Calidad De Software', percentage: 0 },
     { name: 'Estadística Descriptiva', percentage: 0 },
     { name: 'Ética Para El Trabajo', percentage: 0 },
@@ -18,14 +18,12 @@ export class AsistenciaPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // Animar las barras después de cargar la página
     setTimeout(() => {
       this.animateProgress();
-    }, 500); // Espera de 500ms antes de iniciar la animación
+    }, 500);
   }
 
   animateProgress() {
-    // Simulamos la animación incrementando gradualmente los valores
     this.courses = [
       { name: 'Arquitectura', percentage: 60 },
       { name: 'Calidad De Software', percentage: 66.7 },

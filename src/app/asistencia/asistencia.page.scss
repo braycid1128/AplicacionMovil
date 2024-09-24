@@ -1,42 +1,42 @@
 ion-header {
-    --background: #004ba0; /* Color azul primario */
+    --background: #004ba0;
   }
   
   .course {
-    margin: 10px 5px;  /* Cuadros más pequeños */
-    border-radius: 8px; /* Borde redondeado */
-    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1); /* Sombra más suave */
-    font-size: 14px; /* Texto más pequeño */
+    margin: 10px 5px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
   }
   
   ion-card-header {
-    padding: 10px 10px; /* Espaciado más pequeño */
+    padding: 10px 10px;
   }
   
   .progress-bar-container {
-    background-color: #e0e0e0; /* Color de fondo de la barra */
+    background-color: #e0e0e0;
     border-radius: 10px;
     overflow: hidden;
-    height: 12px; /* Barra más pequeña */
+    height: 12px;
     width: 100%;
     margin-bottom: 8px;
   }
   
   .progress-bar {
-    background-color: #004ba0; /* Cambiar el color a azul */
+    background-color: #004ba0;
     height: 100%;
-    transition: width 5s ease-in-out; /* Transición suave */
+    transition: width 5s ease-in-out;
   }
   
   ion-card-title {
-    font-size: 16px; /* Texto de título más pequeño */
+    font-size: 16px;
     font-weight: 600;
-    color: #004ba0; /* Azul primario */
+    color: #004ba0;
   }
   
   p {
-    font-size: 13px; /* Texto del porcentaje más pequeño */
-    color: #004ba0; /* Azul primario */
+    font-size: 13px;
+    color: #004ba0;
     margin-top: 5px;
     font-weight: bold;
     text-align: right;

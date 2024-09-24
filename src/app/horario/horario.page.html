@@ -84,35 +84,21 @@
   </div>
 </ion-content>
 
-<!-- Footer con un botón para ver el perfil -->
 <ion-footer>
   <ion-toolbar color="secondary" mode="md">
-    <ion-buttons slot="start">
-      <ion-button (click)="irAperfil()">
-        <ion-icon name="person-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="irAcalendario()">
-        <ion-icon name="calendar-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-footer>
 
 <style>
-  /* Imagen de fondo */
   .background-image {
     --background: url('assets/img/background.jpg') no-repeat center center / cover;
     height: 100%;
   }
 
-  /* Contenedor para el horario */
   .schedule-container {
     padding: 20px;
   }
 
-  /* Estilo para las cards de asignaturas */
   ion-card {
     margin-bottom: 15px;
     background-color: white;

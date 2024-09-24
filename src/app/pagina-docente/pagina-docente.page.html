@@ -7,13 +7,11 @@
 <ion-content [fullscreen]="true" class="background-image">
   <div class="form-container">
     <div class="button-container">
-      <!-- Botón para Generar Código -->
       <ion-button color="tertiary" expand="block" class="button-item" mode="ios" (click)="goToCodigoQr()">
         <ion-icon name="key-outline" slot="start"></ion-icon>
         Generar Código
       </ion-button>
 
-      <!-- Botón para Ver Secciones -->
       <ion-button color="secondary" expand="block" class="button-item" mode="ios" (click)="goToSecciones()">
         <ion-icon name="folder-outline" slot="start"></ion-icon>
         Ver Secciones
@@ -22,7 +20,6 @@
   </div>
 </ion-content>
 
-<!-- Footer en la parte inferior de la pantalla -->
 <ion-footer>
   <ion-toolbar color="secondary" mode="md">
     <ion-buttons slot="start" (click)="goToPerfilDocente()">
@@ -34,33 +31,29 @@
 </ion-footer>
 
 <style>
-  /* Imagen de fondo */
   .background-image {
     --background: url('assets/img/background.jpg') no-repeat center center / cover;
     height: 100%;
   }
 
-  /* Contenedor del formulario centrado */
   .form-container {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra verticalmente */
-    align-items: center; /* Centra horizontalmente */
-    height: 100%; /* Ocupa todo el alto de la pantalla */
-    padding: 20px; /* Espacio alrededor del contenido */
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
   }
 
-  /* Contenedor de los botones */
   .button-container {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Espacio entre los botones */
+    gap: 10px;
     padding: 20px;
-    width: 100%; /* Para que ocupe el ancho del contenedor */
-    max-width: 400px; /* Ancho máximo para los botones */
+    width: 100%;
+    max-width: 400px;
   }
 
-  /* Estilo para el footer */
   ion-footer {
     position: fixed;
     bottom: 0;

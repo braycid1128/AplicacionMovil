@@ -6,15 +6,12 @@
 
 <ion-content [fullscreen]="true" class="background-image">
   <div id="container">
-    <!-- Botones alineados uno al lado del otro -->
     <div class="button-container">
-      <!-- Botón de Estudiantes con ícono -->
       <ion-button color="tertiary" class="button-item" mode="ios" (click)="goToEstudiantes()">
         <ion-icon name="school-outline" slot="start"></ion-icon>
         Estudiantes
       </ion-button>
 
-      <!-- Botón de Docentes con ícono -->
       <ion-button color="secondary" class="button-item" mode="ios" (click)="goToDocentes()">
         <ion-icon name="person-outline" slot="start"></ion-icon>
         Docentes
@@ -23,51 +20,44 @@
   </div>
 </ion-content>
 
-<!-- Footer en la parte inferior de la pantalla -->
 <ion-footer>
   <ion-toolbar color="secondary" mode="md">
   </ion-toolbar>
 </ion-footer>
 
 <style>
-  /* Imagen de fondo */
   .background-image {
     --background: url('assets/img/background.jpg') no-repeat center center / cover;
     height: 100%;
   }
 
-  /* Estilo del header */
   ion-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 10; /* Asegura que esté encima del contenido */
+    z-index: 10;
   }
 
-  /* Estilo del contenedor */
   #container {
     color: white;
     text-align: center;
-    padding-top: 80px; /* Añadir espacio para evitar que el contenido quede detrás del header */
+    padding-top: 80px;
   }
 
-  /* Contenedor de los botones */
   .button-container {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Espacio entre los botones */
+    gap: 10px;
     padding: 20px;
   }
 
-  /* Estilo para los botones */
   .button-item {
-    flex: 1; /* Esto asegura que ambos botones tengan el mismo tamaño */
-    max-width: 150px; /* Tamaño máximo para los botones */
+    flex: 1;
+    max-width: 150px;
     text-align: center;
   }
 
-  /* Estilo para el footer */
   ion-footer {
     position: fixed;
     bottom: 0;
