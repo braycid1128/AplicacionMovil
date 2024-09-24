@@ -6,15 +6,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./codigo-qr.page.scss'],
 })
 export class CodigoQrPage {
-  sections = ['D398', 'D298', 'E638', 'A123', 'B456', 'C789'];
-  qrCodeData: string = '';
+  sections: string[] = [
+    'Sección 1',
+    'Sección 2',
+    'Sección 3',
+    'Sección 4',
+    'Sección 5'
+  ];
 
-  constructor() {
-    console.log('CodigoQrPage initialized');
+  qrCodeData: string | null = null;
+
+  // This function generates a random section
+  generateRandomQRCode() {
+    const randomIndex = Math.floor(Math.random() * this.sections.length);
+    this.qrCodeData = this.sections[randomIndex];
   }
 
+  // This function generates QR code for a selected section
   generateQRCode(section: string) {
-    this.qrCodeData = `Codigo: ${section}-${Math.floor(Math.random() * 10000)}`;
-    console.log(`Generated QR Code Data: ${this.qrCodeData}`);
+    this.qrCodeData = section;
   }
 }

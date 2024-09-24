@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="secondary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/pagina-docente" text="" icon="arrow-back-outline"></ion-back-button>
+      <ion-back-button defaultHref="/pagina-estudiante" text="" icon="arrow-back-outline"></ion-back-button>
     </ion-buttons>
     <ion-title mode="md" class="ion-text-center">Codigo QR</ion-title>
   </ion-toolbar>
@@ -14,12 +14,36 @@
     </ion-item>
   </ion-list>
 
+  <div>
+    <ion-button expand="full" (click)="generateRandomQRCode()">Generar Código QR Aleatorio</ion-button>
+  </div>
+
   <div *ngIf="qrCodeData" class="qr-code-container">
     <qrcode [qrdata]="qrCodeData" [width]="256"></qrcode>
     <p>Escanea el código QR para: {{ qrCodeData }}</p>
   </div>
 </ion-content>
 
+!-- Footer en la parte inferior de la pantalla -->
 <ion-footer>
-  <ion-toolbar color="secondary" mode="md"></ion-toolbar>
+  <ion-toolbar color="secondary" mode="md">
+  </ion-toolbar>
 </ion-footer>
+
+<style>
+  /* Imagen de fondo */
+  .background-image {
+    --background: url('assets/img/background.jpg') no-repeat center center / cover;
+    height: 100%;
+  }
+
+
+  /* Estilo para el footer */
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+</style>
