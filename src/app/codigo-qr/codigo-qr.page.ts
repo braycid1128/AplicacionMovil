@@ -6,24 +6,30 @@ import { Component } from '@angular/core';
   styleUrls: ['./codigo-qr.page.scss'],
 })
 export class CodigoQrPage {
-  sections: string[] = [
-    'Sección 1',
-    'Sección 2',
-    'Sección 3',
-    'Sección 4',
-    'Sección 5'
-  ];
+  fechaSeleccionada: string = ''; // Variable para la fecha seleccionada
+  mostrarCodigoQR: boolean = false; // Controla la visibilidad del código QR
+  config = { data: '' }; // Objeto para almacenar los datos del QR
 
-  qrCodeData: string | null = null;
+  constructor() {}
 
-  // This function generates a random section
-  generateRandomQRCode() {
-    const randomIndex = Math.floor(Math.random() * this.sections.length);
-    this.qrCodeData = this.sections[randomIndex];
+  // Función para generar el código QR cuando se selecciona una fecha
+  onGenerarQR() {
+    if (this.fechaSeleccionada) {
+      this.config.data = this.fechaSeleccionada; // Asignar la fecha seleccionada al QR
+      this.mostrarCodigoQR = true; // Mostrar el código QR
+    }
   }
 
-  // This function generates QR code for a selected section
-  generateQRCode(section: string) {
-    this.qrCodeData = section;
+  // Función para borrar el código QR
+  onBorrarQR() {
+    this.mostrarCodigoQR = false; // Ocultar el código QR
+    this.fechaSeleccionada = ''; // Limpiar la fecha seleccionada
+    this.config.data = ''; // Limpiar los datos del QR
+  }
+
+  // Función para ver la asistencia (ejemplo)
+  onVerAsistencia() {
+    // Aquí puedes agregar la lógica para ver la asistencia
+    console.log('Ver Asistencia');
   }
 }
