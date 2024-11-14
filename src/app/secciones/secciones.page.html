@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="background-image">
+  <!-- Lista de secciones -->
   <ion-list *ngIf="!qrImage">
     <ion-item *ngFor="let seccion of secciones" (click)="mostrarQr(seccion)">
       <ion-label>
@@ -17,20 +18,33 @@
     </ion-item>
   </ion-list>
 
-  <!-- Mostrar imagen de QR al seleccionar una sección -->
+  <!-- Mostrar imagen de QR y la lista de asistencia al seleccionar una sección -->
   <div *ngIf="qrImage" class="qr-container">
     <ion-label class="ion-text-center">
       <h2>{{ qrSeccion.codigo }}</h2>
       <p>Descripción: {{ qrSeccion.descripcion }}</p>
     </ion-label>
     <img [src]="qrImage" class="qr-image" alt="Código QR">
+
+    <!-- Mostrar la lista de asistencia de los 10 alumnos -->
+    <ion-list class="alumnos-list">
+      <ion-item *ngFor="let alumno of qrSeccion.alumnosAsistencia">
+        <ion-label class="alumno-label">
+          <h3>{{ alumno.nombre }}</h3>
+        </ion-label>
+        <ion-label class="asistencia-label">
+          <p>{{ alumno.asistencia | number:'1.0-0' }}%</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
     <ion-button expand="block" color="tertiary" (click)="cerrarQr()">
       Cerrar
     </ion-button>
   </div>
 </ion-content>
 
-<!-- Footer con botones de perfil y calendario -->
+<!-- Footer -->
 <ion-footer>
   <ion-toolbar color="secondary" mode="md">
   </ion-toolbar>
@@ -55,6 +69,8 @@
     --padding-start: 16px;
     --padding-end: 16px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
   }
 
   ion-label h2 {
@@ -74,6 +90,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    padding: 20px;
   }
 
   /* Imagen del QR */
@@ -82,6 +99,38 @@
     margin-bottom: 20px;
     width: 200px; /* Ajusta el tamaño de la imagen */
     height: 200px;
+  }
+
+  /* Estilo para la lista de alumnos */
+  .alumnos-list {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  ion-item {
+    --inner-padding-start: 0px;
+    --inner-padding-end: 0px;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Estilo de los labels de los alumnos */
+  .alumno-label {
+    flex: 1;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .asistencia-label {
+    font-size: 16px;
+    color: #4caf50; /* Verde para el porcentaje de asistencia */
+    font-weight: bold;
+    text-align: right;
+    width: 50%;
   }
 
   /* Estilo para el footer */

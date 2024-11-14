@@ -67,6 +67,11 @@ const routes: Routes = [
     path: 'escanear',
     loadChildren: () => import('./escanear/escanear.module').then( m => m.EscanearPageModule)
   },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },
+
 ];
 
 @NgModule({

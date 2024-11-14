@@ -10,6 +10,10 @@ export class HomePage {
 
   constructor(private router: Router) { }
 
+  goToRegistro() {
+    this.router.navigate(['/registro']); // Redirige a la página de registro
+  }
+
   goToEstudiantes() {
     this.router.navigate(['/inicio-sesion']);
   }

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/pagina-docente" text="" icon="arrow-back-outline"></ion-back-button>
     </ion-buttons>
-    <ion-title mode="md" class="ion-text-center">Perfil</ion-title>
+    <ion-title mode="md" class="ion-text-center">Perfil Docente</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,12 +15,12 @@
     </ion-card-header>
 
     <ion-card-content>
-      <!-- Sección de la foto del estudiante -->
+      <!-- Sección de la foto del docente -->
       <div class="profile-picture">
         <img [src]="docent.photo || 'assets/docente.jpg'" alt="Foto de {{ docent.name }}">
       </div>
 
-      <!-- Información adicional del estudiante -->
+      <!-- Información adicional del docente -->
       <ion-list>
         <ion-item>
           <ion-label>
@@ -45,7 +45,7 @@
 
         <ion-item>
           <ion-label>
-            <strong>Horario de atencion:</strong>
+            <strong>Horario de Atención:</strong>
             <p>{{ docent.hours }}</p>
           </ion-label>
         </ion-item>

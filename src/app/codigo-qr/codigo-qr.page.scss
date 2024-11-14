@@ -1,0 +1,31 @@
+
+  .content-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Alinea los elementos verticalmente */
+    align-items: center; /* Alinea los elementos horizontalmente */
+    height: 100%; /* Asegura que el contenedor ocupe toda la pantalla */
+  }
+  
+  .schedule-container {
+    padding: 20px;
+  }
+  
+  ion-card {
+    margin-bottom: 15px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .date-picker-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    width: 100%; /* Ocupa todo el ancho disponible */
+  }
+  
+  ion-datetime {
+    width: 80%; /* O ajusta según el tamaño deseado */
+  }
+  

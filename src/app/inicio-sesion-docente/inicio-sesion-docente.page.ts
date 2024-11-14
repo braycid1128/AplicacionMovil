@@ -1,66 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { usuarioLog } from 'src/app/interfaces/usuario-log';
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { LocalDbService } from '../services/localdb.service';
+import { Router } from '@angular/router';  // Importa Router
 
 @Component({
   selector: 'app-inicio-sesion-docente',
   templateUrl: './inicio-sesion-docente.page.html',
   styleUrls: ['./inicio-sesion-docente.page.scss'],
 })
-export class InicioSesionDocentePage implements OnInit {
+export class InicioSesionDocentePage {
+  usr = {
+    username: '',
+    password: ''
+  };
 
-  mensaje:string=""
+  mensaje: string = '';
 
-  usr:usuarioLog={
-    username:'',
-    password:''
-  }
+  constructor(private localDbService: LocalDbService, private router: Router) {}  // Inyecta Router
 
-  constructor(private alertctrl:AlertController, private router:Router) { }
+  async enviar() {
+    const usuarioGuardado = await this.localDbService.obtenerDatos('usuario');
 
-  ngOnInit() {
-   
-  }
-
-  enviar(){
-
-
-    console.log("Form Enviado...");
-    console.log(this.usr);
-    if(this.usr.username=="docente@duocuc.cl" && this.usr.password=="duoc"){
-      this.usr.username='';
-      this.usr.password=''
-      this.router.navigate(['/pagina-docente'])
+    if (usuarioGuardado) {
+      if (this.usr.username === usuarioGuardado.correo && this.usr.password === usuarioGuardado.clave) {
+        this.mensaje = 'Inicio de sesión exitoso';
+        this.router.navigate(['/pagina-docente']);  // Navega a la página docente
+      } else {
+        this.mensaje = 'Correo o contraseña incorrectos';
+      }
+    } else {
+      this.mensaje = 'No hay datos de registro';
     }
-    else{
-      this.mensaje="Acceso denegado"
-      this.alerta()
-    }
-  }
-
-  async alerta(){
-    console.log("Alerta desde controller");
-    const alert = await this.alertctrl.create({
-      header: 'Acceso denegado',
-      subHeader: 'Correo y/o contraseña incorrecto',
-      buttons: [{
-        id:'aceptar del alert controller',
-        text:'Aceptar',
-        cssClass:'color-aceptar',
-        handler:()=>{
-          console.log(event);
-        }
-      },{
-        text:'Cancelar',
-        cssClass:'color-cancelar'
-      }],
-    });
-
-    await alert.present();
   }
 
   goToRestablecer() {
-    this.router.navigate(['/restablecer']);
+    this.router.navigate(['/restablecer']);  // Redirige a la página de restablecimiento
   }
 }

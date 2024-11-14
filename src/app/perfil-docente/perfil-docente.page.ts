@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router'; // Import Router
+import { LocalDbService } from '../services/localdb.service'; // Import LocalDbService
 
 @Component({
   selector: 'app-perfil-docente',
@@ -9,16 +10,30 @@ import { Router } from '@angular/router'; // Import Router
 })
 export class PerfilDocentePage {
   docent = {
-    name: 'Carlos Mendoza',
-    photo: '', // URL of the student's photo or default
+    name: '',
+    photo: '', // URL of the professor's photo or default
     teach: 'Arquitectura',
     yearOfEntry: 2004,
     office: 'Sala 205, Edificio Principal',
-    email: 'docente@duocuc.cl',
+    email: '',
     hours: 'Lunes a Viernes, 10:00 AM - 12:00 PM'
   };
 
-  constructor(private alertController: AlertController, private router: Router) {} // Inject Router
+  constructor(
+    private alertController: AlertController,
+    private router: Router,
+    private localDbService: LocalDbService // Inyecta el servicio para obtener los datos
+  ) {}
+
+  async ngOnInit() {
+    // Obtener datos guardados en local storage o base de datos local
+    const usuarioGuardado = await this.localDbService.obtenerDatos('usuario');
+    if (usuarioGuardado) {
+      this.docent.name = `${usuarioGuardado.nombre} ${usuarioGuardado.apellido}`; // Combina el nombre y apellido
+      this.docent.email = usuarioGuardado.correo; // Establece el correo del docente
+      this.docent.photo = usuarioGuardado.foto || 'assets/docente.png'; // Establece la foto si existe
+    }
+  }
 
   async confirmLogout() {
     const alert = await this.alertController.create({
@@ -45,7 +60,7 @@ export class PerfilDocentePage {
 
   async logout() {
     console.log('Logged out');
-    // Redirect to home page
-    this.router.navigate(['/home']); // Replace '/home' with your actual home route
+    // Redirige a la página de inicio
+    this.router.navigate(['/home']); // Reemplaza '/home' con tu ruta de inicio real
   }
 }
