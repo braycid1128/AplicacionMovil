@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LocalDbService } from '../services/localdb.service';  // Importa el servicio
-import { AlertController } from '@ionic/angular';  // Importa el AlertController
-import { Router } from '@angular/router';  // Para redirigir a la página de inicio
+import { LocalDbService } from '../services/localdb.service'; 
+import { AlertController } from '@ionic/angular'; 
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-registro',
@@ -18,22 +18,18 @@ export class RegistroPage {
   };
 
   constructor(
-    private localDbService: LocalDbService,  // Inyecta el servicio
-    private alertController: AlertController, // Inyecta el AlertController
-    private router: Router  // Inyecta Router para la navegación
+    private localDbService: LocalDbService,
+    private alertController: AlertController,
+    private router: Router
   ) {}
 
-  // Función para manejar el envío del formulario
   async onSubmit() {
-    // Guarda los datos del usuario en el almacenamiento
     await this.localDbService.guardarDatos('usuario', this.usuario);
     console.log('Datos guardados', this.usuario);
 
-    // Muestra la alerta de registro exitoso
     await this.presentAlert();
   }
 
-  // Función para mostrar la alerta de "Registro Exitoso"
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Registro Exitoso',
@@ -42,7 +38,6 @@ export class RegistroPage {
         {
           text: 'Aceptar',
           handler: () => {
-            // Redirige a la página de inicio cuando se hace clic en "Aceptar"
             this.router.navigate(['/home']);
           }
         }

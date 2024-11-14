@@ -10,11 +10,8 @@ export class RestablecerPage {
   mensaje: string = '';
 
   enviarCodigo() {
-    // Aquí puedes implementar la lógica para enviar el código de recuperación
-    // Por ahora, solo mostramos un mensaje
     this.mensaje = 'Código enviado satisfactoriamente';
     
-    // Reiniciar el formulario o la variable de correo, si es necesario
     this.correo = '';
   }
 }

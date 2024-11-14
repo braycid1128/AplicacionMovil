@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LocalDbService } from '../services/localdb.service';
-import { Router } from '@angular/router';  // Importa Router
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -16,7 +16,7 @@ export class InicioSesionPage {
 
   mensaje: string = '';
 
-  constructor(private localDbService: LocalDbService, private router: Router) {}  // Inyecta Router
+  constructor(private localDbService: LocalDbService, private router: Router) {} 
 
   async enviar() {
     const usuarioGuardado = await this.localDbService.obtenerDatos('usuario');
@@ -24,7 +24,7 @@ export class InicioSesionPage {
     if (usuarioGuardado) {
       if (this.usr.username === usuarioGuardado.correo && this.usr.password === usuarioGuardado.clave) {
         this.mensaje = 'Inicio de sesión exitoso';
-        this.router.navigate(['/pagina-estudiante']);  // Navega a la página docente
+        this.router.navigate(['/pagina-estudiante']); 
       } else {
         this.mensaje = 'Correo o contraseña incorrectos';
       }
@@ -34,6 +34,6 @@ export class InicioSesionPage {
   }
 
   goToRestablecer() {
-    this.router.navigate(['/restablecer']);  // Redirige a la página de restablecimiento
+    this.router.navigate(['/restablecer']);
   }
 }

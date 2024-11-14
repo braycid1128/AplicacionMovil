@@ -15,12 +15,10 @@
     </ion-card-header>
 
     <ion-card-content>
-      <!-- Sección de la foto del estudiante -->
       <div class="profile-picture">
         <img [src]="student.photo || 'assets/estudiante.png'" alt="Foto de {{ student.name }}">
       </div>
 
-      <!-- Información adicional del estudiante -->
       <ion-list>
         <ion-item>
           <ion-label>
@@ -54,7 +52,6 @@
   </ion-card>
 </ion-content>
 
-<!-- Footer en la parte inferior de la pantalla -->
 <ion-footer>
   <ion-toolbar color="secondary" mode="md">
     <ion-buttons slot="end" (click)="confirmLogout()">
@@ -64,13 +61,11 @@
 </ion-footer>
 
 <style>
-  /* Imagen de fondo */
   .background-image {
     --background: url('assets/img/background.jpg') no-repeat center center / cover;
     height: 100%;
   }
 
-  /* Estilo para el footer */
   ion-footer {
     position: fixed;
     bottom: 0;
