@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LocalDbService } from '../services/localdb.service';  // Importa el servicio
-import { AlertController } from '@ionic/angular';  // Importa el AlertController
-import { Router } from '@angular/router';  // Para redirigir a la página de inicio
+import { LocalDbService } from '../services/localdb.service';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -18,35 +18,34 @@ export class RegistroPage {
   };
 
   constructor(
-    private localDbService: LocalDbService,  // Inyecta el servicio
-    private alertController: AlertController, // Inyecta el AlertController
-    private router: Router  // Inyecta Router para la navegación
+    private localDbService: LocalDbService,
+    private alertController: AlertController,
+    private router: Router
   ) {}
 
   // Función para manejar el envío del formulario
   async onSubmit() {
+    // Validar si todos los campos están completos
+    if (!this.usuario.nombre || !this.usuario.apellido || !this.usuario.correo || !this.usuario.clave) {
+      await this.presentAlert('Error', 'Por favor, completa todos los campos antes de continuar.');
+      return;
+    }
+
     // Guarda los datos del usuario en el almacenamiento
     await this.localDbService.guardarDatos('usuario', this.usuario);
     console.log('Datos guardados', this.usuario);
 
     // Muestra la alerta de registro exitoso
-    await this.presentAlert();
+    await this.presentAlert('Registro Exitoso', 'Te has registrado correctamente.');
+    this.router.navigate(['/home']); // Redirige a la página de inicio
   }
 
-  // Función para mostrar la alerta de "Registro Exitoso"
-  async presentAlert() {
+  // Función para mostrar alertas
+  async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
-      header: 'Registro Exitoso',
-      message: 'Te has registrado correctamente.',
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: () => {
-            // Redirige a la página de inicio cuando se hace clic en "Aceptar"
-            this.router.navigate(['/home']);
-          }
-        }
-      ]
+      header: header,
+      message: message,
+      buttons: ['Aceptar']
     });
 
     await alert.present();

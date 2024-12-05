@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'AplicacionMovil',
+  appId: 'brayan.appasistencia1',
+  appName: 'appasistencia1',
   webDir: 'www'
 };
 
