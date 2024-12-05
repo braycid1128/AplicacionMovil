@@ -9,23 +9,39 @@
 
 <ion-content [fullscreen]="true" class="background-image">
   <div class="content-container">
-    <ion-button expand="block" color="primary" (click)="onGenerarQR()">
-      GENERAR CÓDIGO QR
-    </ion-button>
+    <!-- Sección de selección de sección -->
+    <ion-item>
+      <ion-label>Seleccionar Sección</ion-label>
+      <ion-select [(ngModel)]="seccionSeleccionada" placeholder="Selecciona una sección">
+        <ion-select-option value="seccion1">D384</ion-select-option>
+        <ion-select-option value="seccion2">E983</ion-select-option>
+        <ion-select-option value="seccion3">E409</ion-select-option>
+        <ion-select-option value="seccion3">F202</ion-select-option>
+        <ion-select-option value="seccion3">G103</ion-select-option>
+        <!-- Agrega más opciones si es necesario -->
+      </ion-select>
+    </ion-item>
 
-    <div *ngIf="mostrarCodigoQR" class="qr-container">
-      <qrcode [qrdata]="config.data" [width]="256"></qrcode>
-      <ion-button expand="block" color="primary" (click)="onBorrarQR()">
-        BORRAR QR
-      </ion-button>
-    </div>
-
+    <!-- Sección para seleccionar fecha -->
     <div class="date-picker-container">
       <ion-datetime 
         display-format="MM/DD/YYYY" 
         [(ngModel)]="fechaSeleccionada" 
         placeholder="Selecciona una fecha">
       </ion-datetime>
+    </div>
+
+    <!-- Botón para generar QR -->
+    <ion-button expand="block" color="primary" (click)="onGenerarQR()">
+      GENERAR CÓDIGO QR
+    </ion-button>
+
+    <!-- Mostrar el QR generado -->
+    <div *ngIf="mostrarCodigoQR" class="qr-container">
+      <qrcode [qrdata]="config.data" [width]="256"></qrcode>
+      <ion-button expand="block" color="primary" (click)="onBorrarQR()">
+        BORRAR QR
+      </ion-button>
     </div>
   </div>
 </ion-content>
