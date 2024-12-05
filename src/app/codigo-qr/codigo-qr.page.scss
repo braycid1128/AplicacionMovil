@@ -3,9 +3,9 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Alinea los elementos verticalmente */
-    align-items: center; /* Alinea los elementos horizontalmente */
-    height: 100%; /* Asegura que el contenedor ocupe toda la pantalla */
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
   }
   
   .schedule-container {
@@ -21,11 +21,11 @@
   .date-picker-container {
     margin-top: 20px;
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    width: 100%; /* Ocupa todo el ancho disponible */
+    justify-content: center;
+    width: 100%;
   }
   
   ion-datetime {
-    width: 80%; /* O ajusta según el tamaño deseado */
+    width: 80%;
   }
   

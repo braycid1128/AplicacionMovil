@@ -14,7 +14,6 @@
     </ion-button>
 
     <div *ngIf="mostrarCodigoQR" class="qr-container">
-      <!-- Aquí se muestra el código QR -->
       <qrcode [qrdata]="config.data" [width]="256"></qrcode>
       <ion-button expand="block" color="primary" (click)="onBorrarQR()">
         BORRAR QR

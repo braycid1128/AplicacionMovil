@@ -10,25 +10,21 @@
 <ion-content [fullscreen]="true" class="background-image">
   <div class="content-container">
     <form (ngSubmit)="onSubmit()" #registroForm="ngForm" class="form-container">
-      <!-- Nombre -->
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
         <ion-input type="text" name="nombre" [(ngModel)]="usuario.nombre" required></ion-input>
       </ion-item>
 
-      <!-- Apellido -->
       <ion-item>
         <ion-label position="floating">Apellido</ion-label>
         <ion-input type="text" name="apellido" [(ngModel)]="usuario.apellido" required></ion-input>
       </ion-item>
 
-      <!-- Correo -->
       <ion-item>
         <ion-label position="floating">Correo</ion-label>
         <ion-input type="email" name="correo" [(ngModel)]="usuario.correo" required></ion-input>
       </ion-item>
 
-      <!-- Clave -->
       <ion-item>
         <ion-label position="floating">Clave</ion-label>
         <ion-input type="password" name="clave" [(ngModel)]="usuario.clave" required></ion-input>
@@ -55,22 +51,21 @@
     z-index: 10;
   }
 
-  /* Contenedor para centrar el formulario */
   .content-container {
     display: flex;
-    justify-content: center;  /* Centrado horizontal */
-    align-items: center;      /* Centrado vertical */
-    height: 100%;             /* Ocupa el 100% de la altura de la pantalla */
+    justify-content: center;  
+    align-items: center;      
+    height: 100%;             
     padding: 20px;
   }
 
   .form-container {
     width: 100%;
-    max-width: 500px;  /* Limita el tamaño máximo del formulario */
+    max-width: 500px;  
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);  /* Fondo blanco con algo de transparencia */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Sombra */
+    background-color: rgba(255, 255, 255, 0.8);  
+    border-radius: 8px; 
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); 
   }
 
   ion-footer {

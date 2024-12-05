@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="background-image">
-  <!-- Lista de secciones -->
   <ion-list *ngIf="!qrImage">
     <ion-item *ngFor="let seccion of secciones" (click)="mostrarQr(seccion)">
       <ion-label>
@@ -18,7 +17,6 @@
     </ion-item>
   </ion-list>
 
-  <!-- Mostrar imagen de QR y la lista de asistencia al seleccionar una sección -->
   <div *ngIf="qrImage" class="qr-container">
     <ion-label class="ion-text-center">
       <h2>{{ qrSeccion.codigo }}</h2>
@@ -26,7 +24,6 @@
     </ion-label>
     <img [src]="qrImage" class="qr-image" alt="Código QR">
 
-    <!-- Mostrar la lista de asistencia de los 10 alumnos -->
     <ion-list class="alumnos-list">
       <ion-item *ngFor="let alumno of qrSeccion.alumnosAsistencia">
         <ion-label class="alumno-label">
@@ -44,20 +41,17 @@
   </div>
 </ion-content>
 
-<!-- Footer -->
 <ion-footer>
   <ion-toolbar color="secondary" mode="md">
   </ion-toolbar>
 </ion-footer>
 
 <style>
-  /* Imagen de fondo */
   .background-image {
     --background: url('assets/img/background.jpg') no-repeat center center / cover;
     height: 100%;
   }
 
-  /* Estilo de lista */
   ion-list {
     margin: 20px;
     background-color: rgba(255, 255, 255, 0.9);
@@ -83,7 +77,6 @@
     color: #666;
   }
 
-  /* Contenedor del QR */
   .qr-container {
     display: flex;
     flex-direction: column;
@@ -93,15 +86,13 @@
     padding: 20px;
   }
 
-  /* Imagen del QR */
   .qr-image {
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 200px; /* Ajusta el tamaño de la imagen */
+    width: 200px;
     height: 200px;
   }
 
-  /* Estilo para la lista de alumnos */
   .alumnos-list {
     width: 100%;
     margin-top: 20px;
@@ -117,7 +108,6 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
-  /* Estilo de los labels de los alumnos */
   .alumno-label {
     flex: 1;
     font-size: 16px;
@@ -127,13 +117,12 @@
 
   .asistencia-label {
     font-size: 16px;
-    color: #4caf50; /* Verde para el porcentaje de asistencia */
+    color: #4caf50;
     font-weight: bold;
     text-align: right;
     width: 50%;
   }
 
-  /* Estilo para el footer */
   ion-footer {
     position: fixed;
     bottom: 0;

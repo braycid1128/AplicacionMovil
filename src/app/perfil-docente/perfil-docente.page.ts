@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router'; // Import Router
-import { LocalDbService } from '../services/localdb.service'; // Import LocalDbService
+import { Router } from '@angular/router';
+import { LocalDbService } from '../services/localdb.service';
 
 @Component({
   selector: 'app-perfil-docente',
@@ -11,7 +11,7 @@ import { LocalDbService } from '../services/localdb.service'; // Import LocalDbS
 export class PerfilDocentePage {
   docent = {
     name: '',
-    photo: '', // URL of the professor's photo or default
+    photo: '',
     teach: 'Arquitectura',
     yearOfEntry: 2004,
     office: 'Sala 205, Edificio Principal',
@@ -22,16 +22,15 @@ export class PerfilDocentePage {
   constructor(
     private alertController: AlertController,
     private router: Router,
-    private localDbService: LocalDbService // Inyecta el servicio para obtener los datos
+    private localDbService: LocalDbService 
   ) {}
 
   async ngOnInit() {
-    // Obtener datos guardados en local storage o base de datos local
     const usuarioGuardado = await this.localDbService.obtenerDatos('usuario');
     if (usuarioGuardado) {
-      this.docent.name = `${usuarioGuardado.nombre} ${usuarioGuardado.apellido}`; // Combina el nombre y apellido
-      this.docent.email = usuarioGuardado.correo; // Establece el correo del docente
-      this.docent.photo = usuarioGuardado.foto || 'assets/docente.png'; // Establece la foto si existe
+      this.docent.name = `${usuarioGuardado.nombre} ${usuarioGuardado.apellido}`;
+      this.docent.email = usuarioGuardado.correo; 
+      this.docent.photo = usuarioGuardado.foto || 'assets/docente.png'; 
     }
   }
 
@@ -60,7 +59,6 @@ export class PerfilDocentePage {
 
   async logout() {
     console.log('Logged out');
-    // Redirige a la página de inicio
-    this.router.navigate(['/home']); // Reemplaza '/home' con tu ruta de inicio real
+    this.router.navigate(['/home']);
   }
 }
