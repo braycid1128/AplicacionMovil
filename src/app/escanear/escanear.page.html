@@ -15,6 +15,9 @@
     </ion-item>
   </ion-list>
   
+  <!-- Add ion-alert for unsupported devices -->
+  <ion-alert *ngIf="!isSupported" header="No soportado" message="El dispositivo no soporta el escaneo de códigos." [buttons]="['OK']"></ion-alert>
+
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="scan()" [disabled]="!isSupported">
       <ion-icon name="scan"></ion-icon>
