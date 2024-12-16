@@ -14,10 +14,11 @@
       <ion-input type="text" [value]="barcode.rawValue" readonly></ion-input>
     </ion-item>
   </ion-list>
-  
-  <!-- Add ion-alert for unsupported devices -->
+
+  <!-- Alert for unsupported devices -->
   <ion-alert *ngIf="!isSupported" header="No soportado" message="El dispositivo no soporta el escaneo de códigos." [buttons]="['OK']"></ion-alert>
 
+  <!-- Floating button for QR scanning -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="scan()" [disabled]="!isSupported">
       <ion-icon name="scan"></ion-icon>
