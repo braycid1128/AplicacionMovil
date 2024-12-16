@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LocalDbService } from '../services/localdb.service';  // Importa el servicio
-import { AlertController } from '@ionic/angular';  // Importa el AlertController
-import { Router } from '@angular/router';  // Para redirigir a la página de inicio
+import { FirebaseService } from '../services/firebase.service';  // Importar el servicio
 
 @Component({
   selector: 'app-registro',
@@ -17,37 +15,29 @@ export class RegistroPage {
     clave: ''
   };
 
-  constructor(
-    private localDbService: LocalDbService,
-    private alertController: AlertController,
-    private router: Router
-  ) {}
+  constructor(private firebaseService: FirebaseService) {}
 
-  async onSubmit() {
-    // Guarda los datos del usuario en el almacenamiento
-    await this.localDbService.guardarDatos('usuario', this.usuario);
-    console.log('Datos guardados', this.usuario);
+  // Método para manejar el envío del formulario
+  onSubmit() {
+    if (this.usuario.nombre && this.usuario.apellido && this.usuario.correo && this.usuario.clave) {
+      // Guardar el usuario localmente primero
+      this.firebaseService.guardarUsuarioLocal(this.usuario)
+        .then(() => {
+          console.log('Usuario guardado localmente');
+        })
+        .catch((error) => {
+          console.error('Error al guardar usuario localmente:', error);
+        });
 
-    // Muestra la alerta de registro exitoso
-    await this.presentAlert();
-  }
-
-  // Función para mostrar la alerta de "Registro Exitoso"
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Registro Exitoso',
-      message: 'Te has registrado correctamente.',
-      buttons: [
-        {
-          text: 'Aceptar',
-          handler: () => {
-            // Redirige a la página de inicio cuando se hace clic en "Aceptar"
-            this.router.navigate(['/home']);
-          }
-        }
-      ]
-    });
-
-    await alert.present();
+      // Llamar al servicio para registrar el usuario en Firebase
+      this.firebaseService.registrarUsuario(this.usuario)
+        .then(() => {
+          console.log('Registro exitoso');
+          // Redirigir o limpiar el formulario si es necesario
+        })
+        .catch((error) => {
+          console.error('Error al registrar usuario:', error);
+        });
+    }
   }
 }

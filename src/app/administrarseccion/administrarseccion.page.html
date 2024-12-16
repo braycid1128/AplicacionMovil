@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/secciones" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="md" class="ion-text-center">Administrar Sección</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="background-image">
+  <!-- Lista de secciones existentes -->
+  <ion-list *ngIf="secciones.length > 0">
+    <ion-item *ngFor="let seccion of secciones">
+      <ion-label>
+        <h2>{{ seccion.codigo }}</h2>
+        <p>{{ seccion.descripcion }}</p>
+        <p>Días: {{ seccion.cantidadDias }}</p>
+      </ion-label>
+      <ion-button color="danger" (click)="eliminarSeccion(seccion.id)">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngIf="secciones.length === 0">
+    <ion-label>
+      <h3>No hay secciones disponibles.</h3>
+    </ion-label>
+  </ion-item>
+
+  <!-- Formulario para agregar nueva sección -->
+  <ion-item>
+    <ion-label position="floating">Código de la Sección</ion-label>
+    <ion-input [(ngModel)]="codigoSeccion" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Descripción de la Sección</ion-label>
+    <ion-input [(ngModel)]="descripcionSeccion" type="text"></ion-input>
+  </ion-item>
+
+  <!-- Nuevo campo para ingresar la cantidad de días -->
+  <ion-item>
+    <ion-label position="floating">Cantidad de Días</ion-label>
+    <ion-input [(ngModel)]="cantidadDias" type="number"></ion-input>
+  </ion-item>
+
+  <!-- Lista de usuarios registrados como multi-select -->
+  <ion-item>
+    <ion-label>Seleccionar Usuarios</ion-label>
+    <ion-select [(ngModel)]="usuariosSeleccionados" multiple="true">
+      <ion-select-option *ngFor="let usuario of usuarios" [value]="usuario.id">
+        {{ usuario.nombre }} {{ usuario.apellido }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="block" color="primary" (click)="agregarSeccion()">Agregar Sección</ion-button>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="secondary" mode="md">
+  </ion-toolbar>
+</ion-footer>
+
+<style>
+  .background-image {
+    --background: url('assets/img/background.jpg') no-repeat center center / cover;
+    height: 100%;
+  }
+
+  ion-list {
+    margin: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  ion-item {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  ion-label h2 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  ion-label p {
+    font-size: 14px;
+    color: #666;
+  }
+
+  ion-button {
+    margin-left: 10px;
+  }
+
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+</style>

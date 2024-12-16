@@ -1,57 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { Router } from '@angular/router'; // Importa Router
 
 @Component({
   selector: 'app-secciones',
   templateUrl: './secciones.page.html',
   styleUrls: ['./secciones.page.scss'],
 })
-export class SeccionesPage {
-  secciones = [
-    { codigo: 'D384', descripcion: 'Sección Diurna'},
-    { codigo: 'E983', descripcion: 'Sección Vespertina'},
-    { codigo: 'E409', descripcion: 'Sección Diurna'},
-    { codigo: 'F202', descripcion: 'Sección Diurna'},
-    { codigo: 'G103', descripcion: 'Sección Vespertina'},
-  ];
+export class SeccionesPage implements OnInit {
+  secciones: any[] = []; // Array para almacenar las secciones
+  loading = true; // Indicador de carga
+  error: string | null = null; // Mensaje de error
 
-  alumnos = [
-    { nombre: 'Carlos Pérez', asistencia: Math.random() * 100 },
-      { nombre: 'Ana Gómez', asistencia: Math.random() * 100 },
-      { nombre: 'Luis Fernández', asistencia: Math.random() * 100 },
-      { nombre: 'María Sánchez', asistencia: Math.random() * 100 },
-      { nombre: 'Juan Martínez', asistencia: Math.random() * 100 },
-      { nombre: 'Paula López', asistencia: Math.random() * 100 },
-      { nombre: 'Pedro Díaz', asistencia: Math.random() * 100 },
-      { nombre: 'Lucía Romero', asistencia: Math.random() * 100 },
-      { nombre: 'Andrés Torres', asistencia: Math.random() * 100 },
-      { nombre: 'Marta Ruiz', asistencia: Math.random() * 100 },
-      { nombre: 'José Morales', asistencia: Math.random() * 100 },
-      { nombre: 'Sofía Jiménez', asistencia: Math.random() * 100 },
-      { nombre: 'Ricardo García', asistencia: Math.random() * 100 },
-      { nombre: 'Elena Martín', asistencia: Math.random() * 100 },
-      { nombre: 'Alberto Pérez', asistencia: Math.random() * 100 },
-  ];
+  constructor(private firestore: Firestore, private router: Router) {} // Inyección de Router
 
-  qrImage: string | null = null;
-  qrSeccion: any = null;
-
-  obtenerAlumnosAleatorios() {
-    let shuffled = this.alumnos.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 10);
+  goToAdminPage() {
+    this.router.navigate(['/administrarseccion']);
   }
 
-  mostrarQr(seccion: any) {
-    this.qrSeccion = seccion;
-    this.qrImage = 'assets/qr/qr-code-placeholder.png';
-
-    let alumnosAleatorios = this.obtenerAlumnosAleatorios();
-    console.log(alumnosAleatorios);
-
-    this.qrSeccion.alumnosAsistencia = alumnosAleatorios;
-  }
-
-  cerrarQr() {
-    this.qrImage = null;
-    this.qrSeccion = null;
+  async ngOnInit() {
+    try {
+      const seccionesCollection = collection(this.firestore, 'secciones');
+      const seccionesSnapshot = await getDocs(seccionesCollection);
+      this.secciones = seccionesSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+    } catch (err) {
+      this.error = 'Hubo un error al cargar las secciones.';
+      console.error(err);
+    } finally {
+      this.loading = false;
+    }
   }
 }

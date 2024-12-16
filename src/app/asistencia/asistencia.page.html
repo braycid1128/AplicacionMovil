@@ -8,19 +8,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="background-image">
-  
-  <ion-card class="course" *ngFor="let course of courses">
+  <!-- Iterar sobre las secciones del usuario -->
+  <ion-card class="course" *ngFor="let section of secciones">
     <ion-card-header>
-      <ion-card-title>{{ course.name }}</ion-card-title>
+      <ion-card-title>{{ section.codigo }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <div class="progress-bar-container">
-        <div class="progress-bar" [style.width]="course.percentage + '%'"></div>
+        <div class="progress-bar" [style.width]="section.percentage + '%'"></div>
       </div>
-      <p>{{ course.percentage }}%</p>
+      <p>{{ section.cantidadDias }} días / {{ section.scannedCount }} días asistidos</p>
+      <p>{{ section.percentage }}%</p>
     </ion-card-content>
   </ion-card>
-
 </ion-content>
 
 <ion-footer>
@@ -40,5 +40,19 @@
     left: 0;
     right: 0;
     z-index: 10;
+  }
+
+  .progress-bar-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    height: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 5px;
   }
 </style>

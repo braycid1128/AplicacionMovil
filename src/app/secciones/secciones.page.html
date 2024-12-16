@@ -7,38 +7,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="background-image">
-  <ion-list *ngIf="!qrImage">
-    <ion-item *ngFor="let seccion of secciones" (click)="mostrarQr(seccion)">
-      <ion-label>
-        <h2>{{ seccion.codigo }}</h2>
-        <p>Descripción: {{ seccion.descripcion }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-padding">
+  <!-- Loading spinner -->
+  <ion-spinner *ngIf="loading" class="center-spinner"></ion-spinner>
 
-  <div *ngIf="qrImage" class="qr-container">
-    <ion-label class="ion-text-center">
-      <h2>{{ qrSeccion.codigo }}</h2>
-      <p>Descripción: {{ qrSeccion.descripcion }}</p>
-    </ion-label>
-    <img [src]="qrImage" class="qr-image" alt="Código QR">
-
-    <ion-list class="alumnos-list">
-      <ion-item *ngFor="let alumno of qrSeccion.alumnosAsistencia">
-        <ion-label class="alumno-label">
-          <h3>{{ alumno.nombre }}</h3>
-        </ion-label>
-        <ion-label class="asistencia-label">
-          <p>{{ alumno.asistencia | number:'1.0-0' }}%</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-
-    <ion-button expand="block" color="tertiary" (click)="cerrarQr()">
-      Cerrar
-    </ion-button>
+  <!-- Error message -->
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
   </div>
+
+  <!-- List of secciones -->
+  <div *ngIf="!loading && secciones.length > 0" class="secciones-container">
+    <ion-card *ngFor="let seccion of secciones" class="seccion-card">
+      <ion-card-header>
+        <ion-card-title>{{ seccion.codigo }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ seccion.descripcion }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Message if no secciones found -->
+  <div *ngIf="!loading && secciones.length === 0" class="no-secciones">
+    <p>No se encontraron secciones.</p>
+  </div>
+
+  <!-- Floating Action Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToAdminPage()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
 
 <ion-footer>

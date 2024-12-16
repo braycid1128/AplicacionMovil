@@ -30,7 +30,7 @@ export class PerfilDocentePage {
     if (usuarioGuardado) {
       this.docent.name = `${usuarioGuardado.nombre} ${usuarioGuardado.apellido}`;
       this.docent.email = usuarioGuardado.correo; 
-      this.docent.photo = usuarioGuardado.foto || 'assets/docente.png'; 
+      this.docent.photo = usuarioGuardado.foto || 'assets/docente.jpg'; 
     }
   }
 

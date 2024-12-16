@@ -13,12 +13,9 @@
     <ion-item>
       <ion-label>Seleccionar Sección</ion-label>
       <ion-select [(ngModel)]="seccionSeleccionada" placeholder="Selecciona una sección">
-        <ion-select-option value="seccion1">D384</ion-select-option>
-        <ion-select-option value="seccion2">E983</ion-select-option>
-        <ion-select-option value="seccion3">E409</ion-select-option>
-        <ion-select-option value="seccion3">F202</ion-select-option>
-        <ion-select-option value="seccion3">G103</ion-select-option>
-        <!-- Agrega más opciones si es necesario -->
+        <ion-select-option *ngFor="let seccion of secciones" [value]="seccion.codigo">
+          {{ seccion.descripcion }}  <!-- Mostrar la descripción de cada sección -->
+        </ion-select-option>
       </ion-select>
     </ion-item>
 
