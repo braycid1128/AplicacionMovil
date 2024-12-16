@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 import { Firestore, collection, getDocs, doc, updateDoc } from '@angular/fire/firestore';
-import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -9,67 +9,87 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./escanear.page.scss'],
 })
 export class EscanearPage implements OnInit {
-  barcodes: any[] = []; // Para almacenar los códigos escaneados
-  isSupported: boolean = true; // Determina si el dispositivo soporta el escaneo
+  barcodes: Barcode[] = []; // Para almacenar los códigos escaneados
+  isSupported = false; // Para verificar si el dispositivo es compatible
+  scannedMessage: string = ''; // Definir la propiedad scannedMessage
 
-  constructor(private firestore: Firestore, private toastController: ToastController) {}
+  constructor(
+    private firestore: Firestore,
+    private toastController: ToastController
+  ) {}
 
   ngOnInit() {
-    // Verificar si el dispositivo soporta el escaneo
-    this.checkDeviceSupport();
+    // Verificar si el dispositivo es compatible con el escaneo
+    BarcodeScanner.isSupported().then((result) => {
+      this.isSupported = result.supported;
+      console.log('Soporte para escaneo: ', this.isSupported);
+    });
   }
 
-  // Verificar si el dispositivo soporta el escaneo
-  async checkDeviceSupport() {
-    try {
-      const permission = await BarcodeScanner.checkPermission();
-      this.isSupported = permission.granted;
-    } catch (error) {
-      this.isSupported = false;
-      console.error('Error al verificar soporte de dispositivo:', error);
+  // Iniciar el escaneo
+  async scan(): Promise<void> {
+    console.log("Iniciando escaneo..."); // Mensaje de depuración
+    const granted = await this.requestPermissions();
+    if (!granted) {
+      this.presentToast('Permiso denegado. Autoriza la cámara.');
+      return;
+    }
+
+    console.log("Permiso otorgado, intentando escanear...");
+
+    // Iniciar el escaneo
+    const { barcodes } = await BarcodeScanner.scan();
+    console.log('Resultados del escaneo:', barcodes); // Verificar si se obtienen resultados
+
+    if (barcodes && barcodes.length > 0) {
+      // Almacenar los códigos escaneados
+      this.barcodes.push(...barcodes);
+      barcodes.forEach((barcode) => {
+        if (barcode.rawValue) {
+          this.handleScan(barcode.rawValue); // Llamar a la función para manejar el código escaneado
+        }
+      });
     }
   }
 
-  // Función para iniciar el escaneo
-  async scan() {
-    try {
-      // Iniciar escaneo
-      const result = await BarcodeScanner.startScan();
-
-      if (result.hasContent) {
-        this.handleScan(result.content); // Llamar a la función que maneja el escaneo
-      } else {
-        console.log('No se escaneó ningún código');
-        this.presentToast('No se escaneó ningún código');
-      }
-    } catch (error) {
-      console.error('Error al escanear:', error);
-      this.presentToast('Error al escanear');
+  // Función para solicitar permisos
+  async requestPermissions(): Promise<boolean> {
+    const { camera } = await BarcodeScanner.checkPermissions();
+    console.log('Permisos solicitados:', camera); // Verificar los permisos solicitados
+    if (camera === 'granted' || camera === 'limited') {
+      return true;
+    } else {
+      const { camera: newPermission } = await BarcodeScanner.requestPermissions();
+      console.log('Nuevo intento de permisos:', newPermission);
+      return newPermission === 'granted' || newPermission === 'limited';
     }
   }
 
-  // Manejar el escaneo y actualizar la asistencia
+  // Función para manejar el código escaneado
   async handleScan(codigoEscaneado: string) {
     const section = await this.findSectionByCodigo(codigoEscaneado);
-    
+
     if (section) {
-      // Aumentar la asistencia
+      // Actualizar la asistencia
       await this.updateAttendance(section);
+      this.scannedMessage = 'Código escaneado correctamente'; // Asignar el mensaje
     } else {
       console.log('Sección no encontrada');
-      this.presentToast('Sección no encontrada');
+      this.scannedMessage = 'Sección no encontrada'; // Asignar el mensaje
     }
   }
 
-  // Función para encontrar la sección por el código
+  // Buscar la sección correspondiente al código escaneado
   async findSectionByCodigo(codigo: string) {
     const seccionesCollection = collection(this.firestore, 'secciones');
     const seccionesSnapshot = await getDocs(seccionesCollection);
-    const sectionDoc = seccionesSnapshot.docs.find(doc => doc.data()['codigo'] === codigo);
+    const sectionDoc = seccionesSnapshot.docs.find(
+      (doc) => doc.data()['codigo'] === codigo
+    );
     return sectionDoc ? { ...sectionDoc.data(), id: sectionDoc.id } : null;
   }
 
-  // Función para actualizar la asistencia de la sección en Firestore
+  // Actualizar la asistencia de la sección
   async updateAttendance(section: any) {
     const scannedCount = section.scannedCount || 0;
     const cantidadDias = section.cantidadDias || 1; // Asegurarse de que cantidadDias no sea 0
@@ -96,7 +116,7 @@ export class EscanearPage implements OnInit {
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message,
-      duration: 2000
+      duration: 2000,
     });
     toast.present();
   }

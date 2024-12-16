@@ -1,31 +1,100 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/pagina-estudiante" text="" icon="arrow-back-outline"></ion-back-button>
-    </ion-buttons>
-    <ion-title mode="md" class="ion-text-center">Escanear</ion-title>
+    <ion-title mode="md" class="ion-text-center">Escanear Código</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let barcode of barcodes">
-      <ion-label position="stacked">{{ barcode.format }}</ion-label>
-      <ion-input type="text" [value]="barcode.rawValue" readonly></ion-input>
-    </ion-item>
-  </ion-list>
+<ion-content [fullscreen]="true" class="background-image">
+  <div id="container">
+    <!-- Botón para iniciar escaneo -->
+    <div class="button-container">
+      <ion-button color="primary" class="button-item" mode="ios" (click)="scan()">
+        <ion-icon name="camera-outline" slot="start"></ion-icon>
+        Iniciar Escaneo
+      </ion-button>
+    </div>
 
-  <!-- Alert for unsupported devices -->
-  <ion-alert *ngIf="!isSupported" header="No soportado" message="El dispositivo no soporta el escaneo de códigos." [buttons]="['OK']"></ion-alert>
+    <!-- Mostrar mensaje de escaneo -->
+    <ion-toast *ngIf="scannedMessage" [message]="scannedMessage" duration="2000"></ion-toast>
 
-  <!-- Floating button for QR scanning -->
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="scan()" [disabled]="!isSupported">
-      <ion-icon name="scan"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <!-- Mostrar los códigos escaneados -->
+    <div *ngFor="let barcode of barcodes" class="scanned-code">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Código Escaneado</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ barcode.rawValue }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar color="secondary"></ion-toolbar>
+  <ion-toolbar color="secondary" mode="md">
+  </ion-toolbar>
 </ion-footer>
+
+<style>
+  .background-image {
+    --background: url('assets/img/background.jpg') no-repeat center center / cover;
+    height: 100%;
+  }
+
+  ion-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+
+  #container {
+    color: white;
+    text-align: center;
+    padding-top: 100px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .button-item {
+    flex: 1;
+    max-width: 250px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .scanned-code {
+    margin-top: 20px;
+  }
+
+  ion-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+
+  ion-card {
+    margin-top: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    color: white;
+  }
+
+  ion-card-title {
+    font-weight: bold;
+  }
+
+  ion-card-content {
+    font-size: 14px;
+  }
+</style>
