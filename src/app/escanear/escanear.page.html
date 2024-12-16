@@ -1,100 +1,30 @@
 <ion-header>
-  <ion-toolbar color="secondary">
-    <ion-title mode="md" class="ion-text-center">Escanear Código</ion-title>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Escáner QR</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="background-image">
-  <div id="container">
-    <!-- Botón para iniciar escaneo -->
-    <div class="button-container">
-      <ion-button color="primary" class="button-item" mode="ios" (click)="scan()">
-        <ion-icon name="camera-outline" slot="start"></ion-icon>
-        Iniciar Escaneo
-      </ion-button>
-    </div>
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-padding">
+      <ion-col size="12" size-md="6">
+        <!-- Botón para iniciar el escaneo -->
+        <ion-button expand="block" color="primary" (click)="scan()">Escanear</ion-button>
+      </ion-col>
+    </ion-row>
 
-    <!-- Mostrar mensaje de escaneo -->
-    <ion-toast *ngIf="scannedMessage" [message]="scannedMessage" duration="2000"></ion-toast>
-
-    <!-- Mostrar los códigos escaneados -->
-    <div *ngFor="let barcode of barcodes" class="scanned-code">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Código Escaneado</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>{{ barcode.rawValue }}</p>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </div>
+    <ion-row>
+      <ion-col>
+        <!-- Lista de códigos escaneados -->
+        <ion-list *ngIf="barcodes.length > 0">
+          <ion-item *ngFor="let barcode of barcodes">
+            <ion-label>
+              <h2>{{ barcode.displayValue }}</h2>
+              <p>Tipo: {{ barcode.format }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar color="secondary" mode="md">
-  </ion-toolbar>
-</ion-footer>
-
-<style>
-  .background-image {
-    --background: url('assets/img/background.jpg') no-repeat center center / cover;
-    height: 100%;
-  }
-
-  ion-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-  }
-
-  #container {
-    color: white;
-    text-align: center;
-    padding-top: 100px;
-  }
-
-  .button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 20px;
-  }
-
-  .button-item {
-    flex: 1;
-    max-width: 250px;
-    text-align: center;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .scanned-code {
-    margin-top: 20px;
-  }
-
-  ion-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-  }
-
-  ion-card {
-    margin-top: 15px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    color: white;
-  }
-
-  ion-card-title {
-    font-weight: bold;
-  }
-
-  ion-card-content {
-    font-size: 14px;
-  }
-</style>

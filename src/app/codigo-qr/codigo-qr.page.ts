@@ -7,16 +7,16 @@ import { Firestore, collection, getDocs } from '@angular/fire/firestore';
   styleUrls: ['./codigo-qr.page.scss'],
 })
 export class CodigoQrPage implements OnInit {
-  secciones: any[] = [];  // Lista de secciones obtenidas de Firebase
-  seccionSeleccionada: string = '';  // Sección seleccionada
-  fechaSeleccionada: string = '';  // Fecha seleccionada para el QR
-  mostrarCodigoQR: boolean = false;  // Para mostrar el QR
-  config: any = { data: '' };  // Configuración del QR
+  secciones: any[] = []; // Lista de secciones obtenidas de Firebase
+  seccionSeleccionada: string = ''; // Sección seleccionada
+  fechaSeleccionada: string = ''; // Fecha seleccionada para el QR
+  mostrarCodigoQR: boolean = false; // Para mostrar el QR
+  config: any = { data: '' }; // Configuración del QR
 
   constructor(private firestore: Firestore) {}
 
   ngOnInit() {
-    this.cargarSecciones();  // Cargar las secciones desde Firebase
+    this.cargarSecciones(); // Cargar las secciones desde Firebase
   }
 
   // Cargar las secciones desde Firebase
@@ -33,9 +33,10 @@ export class CodigoQrPage implements OnInit {
     }
   }
 
-  // Función para generar el QR
+  // Generar el QR con la información seleccionada
   onGenerarQR() {
     if (this.seccionSeleccionada && this.fechaSeleccionada) {
+      // Formato del QR: Sección y Fecha
       this.config.data = `Sección: ${this.seccionSeleccionada}, Fecha: ${this.fechaSeleccionada}`;
       this.mostrarCodigoQR = true;
     } else {
@@ -43,7 +44,7 @@ export class CodigoQrPage implements OnInit {
     }
   }
 
-  // Función para borrar el QR
+  // Borrar el QR generado
   onBorrarQR() {
     this.mostrarCodigoQR = false;
     this.config.data = '';
